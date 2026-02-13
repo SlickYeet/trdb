@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import { Checkbox } from "@/components/ui/checkbox"
+import { cn } from "@/lib/utils"
 import type { Ingredient } from "@/types"
 
 interface IngredientsSectionProps {
@@ -49,7 +50,12 @@ export function IngredientsSection({ ingredients }: IngredientsSectionProps) {
                   </span>
                 )}
                 <span
-                  className={`ml-2 ${isChecked ? "text-muted-foreground line-through" : "text-foreground"}`}
+                  className={cn(
+                    "ml-2",
+                    isChecked
+                      ? "text-muted-foreground line-through"
+                      : "text-foreground",
+                  )}
                 >
                   {ingredient.name}
                 </span>
