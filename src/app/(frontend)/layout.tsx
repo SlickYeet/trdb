@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  description: "The Recipe Database | by Lx2.dev",
-  title: "The Recipe Database",
+  description: "The Recipe DB | by Lx2.dev",
+  title: "The Recipe DB",
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
