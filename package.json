@@ -34,7 +34,9 @@
   "name": "trdb",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "bun generate:importmap && bun db:migrate && next build",
+    "db:migrate": "payload migrate",
+    "db:migrate:create": "payload migrate:create",
     "dev": "next dev",
     "format": "biome format --write .",
     "generate:importmap": "payload generate:importmap",
