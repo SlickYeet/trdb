@@ -1,147 +1,122 @@
-import { fileURLToPath } from "node:url"
-import config from "@payload-config"
-import { headers as getHeaders } from "next/headers.js"
-import { getPayload } from "payload"
+import {
+  IconArrowRight,
+  IconBook,
+  IconChefHat,
+  IconClock,
+  IconSparkles,
+} from "@tabler/icons-react"
+import Link from "next/link"
 
-export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
+import { RecipeGrid } from "@/components/recipe-grid"
+import { recentRecipes } from "@/constants"
+import { cn } from "@/lib/utils"
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
-
+export default function HomePage() {
   return (
-    <main className="mx-auto flex h-screen max-w-5xl flex-col items-center justify-between overflow-hidden p-6 sm:p-11.25">
-      <div className="flex grow flex-col items-center justify-center">
-        {/* Logo */}
-        <picture className="relative">
-          <div className="absolute inset-0 animate-pulse bg-linear-to-r from-[oklch(0.7468_0.1455_302.21)] via-[oklch(0.7345_0.0464_270.71)] to-[oklch(0.7563_0.1807_347.17)] opacity-20 blur-lg dark:via-[oklch(0.5567_0.0816_269.53)]" />
+    <main className="min-h-screen bg-linear-to-b from-background to-muted/30">
+      <section className="relative overflow-hidden py-20 sm:py-32">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="space-y-6 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-secondary/10 px-4 py-2">
+              <IconChefHat className="size-4 text-muted-foreground" />
+              <span className="font-medium text-muted-foreground text-sm">
+                Culinary Collection
+              </span>
+            </div>
 
-          <source srcSet="https://github.com/lx2dev/create-lx2-app/blob/f1209465d59e03e284702d9f492f1bc1cfa49c32/docs/v2/public/android-chrome-192x192.png?raw=true" />
-          <img
-            alt="Logo"
-            className="block h-auto max-w-full"
-            height={65}
-            src="https://github.com/lx2dev/create-lx2-app/blob/f1209465d59e03e284702d9f492f1bc1cfa49c32/docs/v2/public/android-chrome-192x192.png?raw=true"
-            width={65}
-          />
-        </picture>
-
-        {/* Title & Description */}
-        {user ? (
-          <h1 className="mt-6 text-balance font-bold text-5xl tracking-tight md:text-6xl lg:text-7xl">
-            Welcome,{" "}
-            <span className="text-[oklch(0.7468_0.1455_302.21)] capitalize">
-              {user.email}
-            </span>
-            !
-          </h1>
-        ) : (
-          <>
-            <h1 className="mt-6 text-balance font-bold text-5xl tracking-tight md:text-6xl lg:text-7xl">
-              Create{" "}
-              <span className="text-[oklch(0.7468_0.1455_302.21)]">Lx2</span>{" "}
-              App
+            <h1 className="text-balance font-bold text-5xl text-foreground sm:text-6xl">
+              The <span className="text-primary">Recipe DB</span>
             </h1>
-            <p className="text-center text-lg text-neutral-700 md:text-xl lg:mt-6 dark:text-neutral-300">
-              The Most Opinionated Way to Build Next.js Apps
+
+            <p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground">
+              A beautiful collection of recipes we've discovered and loved
+              together. Quick to add, easy to find, and always inspiring.
             </p>
-          </>
-        )}
 
-        {/* Admin Panel & Payload Docs */}
-        <div className="mt-12 flex items-center gap-3">
-          <a
-            className="rounded-md bg-white px-2 py-1 text-black hover:opacity-80 focus:opacity-80 focus:outline-none active:opacity-70 active:outline-none"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="rounded-md border border-white px-2 py-1 text-white hover:opacity-80 focus:opacity-80 focus:outline-none active:opacity-70 active:outline-none"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Payload Docs
-          </a>
+            <div className="flex flex-col justify-center gap-4 pt-4 sm:flex-row">
+              <Link
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-secondary px-6 py-3 font-medium text-white transition-all hover:scale-105 hover:shadow-lg active:scale-95"
+                href="/recipes"
+              >
+                Explore Recipes
+                <IconArrowRight className="size-5" />
+              </Link>
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Links */}
-        <div className="mt-12 flex items-center gap-3">
-          <a
-            className="flex items-center rounded-md border border-white/25 px-2 py-1 outline-none hover:opacity-80 focus:opacity-80 active:opacity-70"
-            href="https://create.lx2.dev/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Docs
-            <svg
-              className="mb-1.5 size-4 fill-none stroke-2 stroke-current"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Docs</title>
-              <path d="M7 7h10v10" />
-              <path d="M7 17 17 7" />
-            </svg>
-          </a>
-          <a
-            className="flex items-center rounded-md border border-white/25 px-2 py-1 outline-none hover:opacity-80 focus:opacity-80 active:opacity-70"
-            href="https://hub.lx2.dev/discord"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Discord
-            <svg
-              className="mb-1.5 size-4 fill-none stroke-2 stroke-current"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Discord</title>
-              <path d="M7 7h10v10" />
-              <path d="M7 17 17 7" />
-            </svg>
-          </a>
-          <a
-            className="flex items-center rounded-md border border-white/25 px-2 py-1 outline-none hover:opacity-80 focus:opacity-80 active:opacity-70"
-            href="https://github.com/lx2dev/create-lx2-app"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            GitHub
-            <svg
-              className="mb-1.5 size-4 fill-none stroke-2 stroke-current"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>GitHub</title>
-              <path d="M7 7h10v10" />
-              <path d="M7 17 17 7" />
-            </svg>
-          </a>
+      <section className="py-12 sm:py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="rounded-2xl border border-border bg-card p-6 text-center">
+              <IconBook className="mx-auto mb-2 size-8 text-primary" />
+              <p className="font-bold text-3xl text-foreground">
+                {recentRecipes.length}+
+              </p>
+              <p className="mt-1 text-muted-foreground text-sm">
+                Recipes Collected
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-card p-6 text-center">
+              <IconClock className="mx-auto mb-2 size-8 text-primary" />
+              <p className="font-bold text-3xl text-foreground">Quick</p>
+              <p className="mt-1 text-muted-foreground text-sm">To Add</p>
+            </div>
+            <div className="rounded-2xl border border-border bg-card p-6 text-center">
+              <IconSparkles className="mx-auto mb-2 size-8 text-primary" />
+              <p className="font-bold text-3xl text-foreground">Always</p>
+              <p className="mt-1 text-muted-foreground text-sm">Inspiring</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Footer */}
-      <div className="flex flex-col items-center gap-1 text-neutral-600 text-sm lg:flex-row lg:gap-2 dark:text-neutral-400">
-        <p className="m-0">Get started by editing </p>
-        <a
-          className="rounded-md bg-neutral-200 px-2 py-1 dark:bg-neutral-800"
-          href={fileURL}
-        >
-          <code>src/app/(frontend)/page.tsx</code>
-        </a>
-      </div>
+      {recentRecipes.length > 0 && (
+        <section className="py-16 sm:py-20">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-12">
+              <h2 className="font-bold text-3xl text-foreground sm:text-4xl">
+                Recent Recipes
+              </h2>
+              <p className="mt-2 text-muted-foreground">
+                Latest additions to our collection
+              </p>
+            </div>
+            <RecipeGrid recipes={recentRecipes} />
+            <div
+              className={cn("mt-12", recentRecipes.length < 3 && "text-center")}
+            >
+              <Link
+                className="inline-flex items-center justify-center gap-2 font-medium text-primary transition-all hover:gap-3"
+                href="/recipes"
+              >
+                View all recipes
+                <IconArrowRight className="size-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="border-border border-t py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="mb-4 font-bold text-3xl text-foreground sm:text-4xl">
+            Cook With Us!
+          </h2>
+          <p className="mx-auto mb-8 max-w-2xl text-balance text-muted-foreground">
+            Browse through our collection of recipes organized by categories and
+            tags.
+          </p>
+          <Link
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-linear-to-r from-secondary to-accent px-6 py-3 font-medium text-white transition-all hover:scale-105 hover:shadow-lg active:scale-95"
+            href="/recipes"
+          >
+            Get Started
+            <IconArrowRight className="size-4" />
+          </Link>
+        </div>
+      </section>
     </main>
   )
 }

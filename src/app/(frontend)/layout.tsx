@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Geist_Mono, Noto_Sans } from "next/font/google"
 
+import { SiteHeader } from "@/components/site-header"
 import { cn } from "@/lib/utils"
 
 import "@/styles/globals.css"
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           geistMono.variable,
         )}
       >
+        <SiteHeader />
         {children}
       </body>
     </html>
