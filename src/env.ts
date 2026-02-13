@@ -7,6 +7,8 @@ export const env = createEnv({
   },
   emptyStringAsUndefined: true,
   runtimeEnv: {
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NODE_ENV: process.env.NODE_ENV,
@@ -14,6 +16,8 @@ export const env = createEnv({
     PREVIEW_SECRET: process.env.PREVIEW_SECRET,
   },
   server: {
+    ADMIN_EMAIL: z.email(),
+    ADMIN_PASSWORD: z.string(),
     DATABASE_URL: z.url(),
     NODE_ENV: z
       .enum(["development", "test", "production"])

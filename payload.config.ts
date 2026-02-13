@@ -16,6 +16,14 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    autoLogin:
+      env.NODE_ENV === "production"
+        ? false
+        : {
+            email: env.ADMIN_EMAIL,
+            password: env.ADMIN_PASSWORD,
+          },
+
     importMap: {
       baseDir: path.resolve(dirname),
     },
