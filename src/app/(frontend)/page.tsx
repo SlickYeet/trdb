@@ -11,6 +11,8 @@ import { RecipeGrid } from "@/components/recipe-grid"
 import { recentRecipes } from "@/constants"
 import { cn } from "@/lib/utils"
 
+export const dynamic = "force-dynamic"
+
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-linear-to-b from-background to-muted/30">
