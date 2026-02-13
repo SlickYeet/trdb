@@ -5,6 +5,7 @@ import * as React from "react"
 import { FilterSidebar } from "@/components/filter-sidebar"
 import { RecipeGrid } from "@/components/recipe-grid"
 import { SearchBar } from "@/components/search-bar"
+import { recentRecipes } from "@/constants"
 import type { Recipe, Tag } from "@/types"
 
 export default function RecipesPage() {
@@ -16,9 +17,9 @@ export default function RecipesPage() {
 }
 
 export function RecipesSuspense() {
-  const [recipes, setRecipes] = React.useState<Recipe[]>([])
+  const [recipes, setRecipes] = React.useState<Recipe[]>(recentRecipes)
   const [tags, setTags] = React.useState<Tag[]>([])
-  const [loading, setLoading] = React.useState<boolean>(true)
+  const [loading, setLoading] = React.useState<boolean>(false)
   const [searchQuery, setSearchQuery] = React.useState<string>("")
   const [selectedTags, setSelectedTags] = React.useState<string[]>([])
   const [sortBy, setSortBy] = React.useState<"newest" | "oldest">("newest")
