@@ -187,9 +187,12 @@ export const recentRecipes: Recipe[] = [
       },
       { description: "Bake for 20 minutes until golden and bubbly.", step: 5 },
     ],
+    notes:
+      "For a vegetarian version, substitute ground beef with lentils or a plant-based meat alternative.",
     prepTime: 20,
     slug: "shepherds-pie",
     tags: ["American", "Comfort Food", "Beef"],
     title: "Shepherd's Pie",
+    updatedAt: new Date().toISOString(),
   },
 ]
