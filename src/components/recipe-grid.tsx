@@ -1,10 +1,11 @@
 "use client"
 
 import { IconChefHat } from "@tabler/icons-react"
+import { usePathname } from "next/navigation"
+import type { Recipe } from "payload-types"
 
 import { RecipeCard } from "@/components/recipe-card"
 import { Skeleton } from "@/components/ui/skeleton"
-import type { Recipe } from "@/types"
 
 interface RecipeGridProps {
   recipes: Recipe[]
@@ -12,6 +13,10 @@ interface RecipeGridProps {
 }
 
 export function RecipeGrid({ recipes, loading }: RecipeGridProps) {
+  const pathname = usePathname()
+
+  const isRecipesPage = pathname === "/recipes"
+
   if (loading) {
     return (
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -28,7 +33,9 @@ export function RecipeGrid({ recipes, loading }: RecipeGridProps) {
         <IconChefHat className="mb-3 size-12 text-muted-foreground" />
         <p className="text-lg text-muted-foreground">No recipes found</p>
         <p className="text-muted-foreground/70 text-sm">
-          Try adjusting your search or filter
+          {isRecipesPage
+            ? "Try adjusting your search or filters"
+            : "Be the first to add a recipe!"}
         </p>
       </div>
     )

@@ -2,10 +2,10 @@
 
 import { IconChefHat, IconClock, IconPointFilled } from "@tabler/icons-react"
 import Link from "next/link"
+import type { Recipe } from "payload-types"
 
 import { TagBadge } from "@/components/tag-badge"
 import { cn } from "@/lib/utils"
-import type { Recipe } from "@/types"
 
 interface RecipeCardProps {
   recipe: Recipe
@@ -52,16 +52,20 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
 
         {recipe.tags && recipe.tags.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-2">
-            {recipe.tags.map((tag) => (
-              <TagBadge
-                key={typeof tag === "string" ? tag : tag.id}
-                tag={tag}
-              />
-            ))}
+            {recipe.tags.map(
+              (tag) =>
+                typeof tag !== "number" && (
+                  <TagBadge
+                    interactive
+                    key={typeof tag === "string" ? tag : tag.slug}
+                    tag={tag}
+                  />
+                ),
+            )}
           </div>
         )}
 
-        {recipe.ingredients.length > 0 && (
+        {recipe.ingredients && (
           <div className="border-border border-t pt-2 text-muted-foreground text-xs">
             <span className="font-semibold">{recipe.ingredients.length}</span>{" "}
             ingredients
