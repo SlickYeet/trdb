@@ -33,7 +33,7 @@
     "target": "ES2017",
     "verbatimModuleSyntax": true
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/migrations"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
