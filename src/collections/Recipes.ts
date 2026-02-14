@@ -111,15 +111,14 @@ export const Recipes: CollectionConfig = {
     {
       admin: {
         position: "sidebar",
-        readOnly: true,
       },
       hooks: {
         beforeChange: [
-          ({ data, operation }) => {
-            if (operation === "create" && data) {
-              data.createdAt = new Date().toISOString()
+          ({ value }) => {
+            if (!value) {
+              return new Date()
             }
-            return data
+            return value
           },
         ],
       },
