@@ -56,7 +56,6 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
               (tag) =>
                 typeof tag !== "number" && (
                   <TagBadge
-                    interactive
                     key={typeof tag === "string" ? tag : tag.slug}
                     tag={tag}
                   />
