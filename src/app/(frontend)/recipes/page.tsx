@@ -17,7 +17,6 @@ export default async function RecipesPage() {
   })
 
   const loading = false
-  const searchQuery = ""
   const selectedTags: string[] = []
   const sortBy: "newest" | "oldest" = "newest"
 

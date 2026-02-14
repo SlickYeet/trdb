@@ -9,17 +9,17 @@ import { cn } from "@/lib/utils"
 interface FilterSidebarProps {
   tags: (Tag & { recipeCount?: number[] })[]
   selectedTags: string[]
-  onTagChange: (tagId: string) => void
+  // onTagChange: (tagId: string) => void
   sortBy: "newest" | "oldest"
-  onSortChange: (sort: "newest" | "oldest") => void
+  // onSortChange: (sort: "newest" | "oldest") => void
 }
 
 export function FilterSidebar({
   tags,
   selectedTags,
-  onTagChange,
+  // onTagChange,
   sortBy,
-  onSortChange,
+  // onSortChange,
 }: FilterSidebarProps) {
   const [expandedSort, setExpandedSort] = React.useState<boolean>(true)
   const [expandedTags, setExpandedTags] = React.useState<boolean>(true)
@@ -54,9 +54,9 @@ export function FilterSidebar({
                   checked={sortBy === option.value}
                   className="h-4 w-4 text-secondary accent-secondary"
                   name="sort"
-                  onChange={() =>
-                    onSortChange(option.value as "newest" | "oldest")
-                  }
+                  onChange={() => {
+                    // onSortChange(option.value as "newest" | "oldest")
+                  }}
                   type="radio"
                   value={option.value}
                 />
@@ -96,7 +96,7 @@ export function FilterSidebar({
                   <input
                     checked={selectedTags.includes(String(tag.id))}
                     className="size-4 rounded text-secondary accent-secondary"
-                    onChange={() => onTagChange(String(tag.id))}
+                    // onChange={() => onTagChange(String(tag.id))}
                     type="checkbox"
                   />
                   <span
