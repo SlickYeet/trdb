@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 
 import { IngredientsSection } from "@/components/modules/recipies/sections/ingredients"
 import { InstructionsSection } from "@/components/modules/recipies/sections/instructions"
+import { RichText } from "@/components/rich-text"
 import { TagBadge } from "@/components/tag-badge"
 import { recentRecipes } from "@/constants"
 
@@ -117,13 +118,16 @@ export default async function RecipePage(props: PageProps<"/recipes/[slug]">) {
 
           {recipe.tags && recipe.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 pt-4">
-              {recipe.tags.map((tag) => (
-                <TagBadge
-                  interactive
-                  key={typeof tag === "string" ? tag : tag.id}
-                  tag={tag}
-                />
-              ))}
+              {recipe.tags.map(
+                (tag) =>
+                  typeof tag !== "number" && (
+                    <TagBadge
+                      interactive
+                      key={typeof tag === "string" ? tag : tag.id}
+                      tag={tag}
+                    />
+                  ),
+              )}
             </div>
           )}
         </div>
@@ -143,8 +147,8 @@ export default async function RecipePage(props: PageProps<"/recipes/[slug]">) {
             {recipe.notes && (
               <div className="space-y-4">
                 <h2 className="font-bold text-2xl text-foreground">Notes</h2>
-                <div className="prose prose-sm max-w-none rounded-xl border border-secondary/20 bg-secondary/5 p-6 text-foreground">
-                  {recipe.notes}
+                <div className="rounded-xl border border-secondary/20 bg-secondary/5 p-6">
+                  <RichText className="text-foreground" data={recipe.notes} />
                 </div>
               </div>
             )}
