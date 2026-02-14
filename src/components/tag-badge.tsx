@@ -7,7 +7,7 @@ interface TagBadgeProps {
 }
 
 export function TagBadge({ tag, interactive }: TagBadgeProps) {
-  const color = tag.color || "#ed4b9b"
+  const color = "#ed4b9b"
 
   if (!interactive) {
     return (
