@@ -6,13 +6,32 @@ import { IngredientsSection } from "@/components/modules/recipies/sections/ingre
 import { InstructionsSection } from "@/components/modules/recipies/sections/instructions"
 import { RichText } from "@/components/rich-text"
 import { TagBadge } from "@/components/tag-badge"
-import { recentRecipes } from "@/constants"
+import { api } from "@/server/api"
+
+async function getRecipeBySlug(slug: string) {
+  const { docs: recipes } = await api.find({
+    collection: "recipes",
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+  })
+
+  return recipes[0]
+}
+
+async function getAllRecipes() {
+  const { docs: recipes } = await api.find({
+    collection: "recipes",
+  })
+  return recipes
+}
 
 export async function generateMetadata(props: PageProps<"/recipes/[slug]">) {
   const { slug } = await props.params
 
-  // const recipe = await getRecipeBySlug(slug)
-  const recipe = recentRecipes.find((r) => r.slug === slug)
+  const recipe = await getRecipeBySlug(slug)
 
   if (!recipe) {
     return {
@@ -28,13 +47,10 @@ export async function generateMetadata(props: PageProps<"/recipes/[slug]">) {
 
 export async function generateStaticParams() {
   try {
-    // const res = await getAllRecipes()
-    // return (res.docs || []).map((recipe) => ({
-    //   slug: recipe.slug,
-    // }))
+    const recipes = await getAllRecipes()
 
-    return recentRecipes.map((recipe) => ({
-      slug: recipe.slug,
+    return recipes.map((recipe) => ({
+      slug: typeof recipe.slug === "string" ? recipe.slug : "",
     }))
   } catch (error) {
     console.error("Failed to generate static params:", error)
@@ -45,8 +61,7 @@ export async function generateStaticParams() {
 export default async function RecipePage(props: PageProps<"/recipes/[slug]">) {
   const { slug } = await props.params
 
-  // const recipe = await getRecipeBySlug(slug)
-  const recipe = recentRecipes.find((r) => r.slug === slug)
+  const recipe = await getRecipeBySlug(slug)
 
   if (!recipe) notFound()
 

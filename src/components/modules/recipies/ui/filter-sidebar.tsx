@@ -1,15 +1,15 @@
 "use client"
 
 import { IconChevronDown } from "@tabler/icons-react"
+import type { Tag } from "payload-types"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import type { Tag } from "@/types"
 
 interface FilterSidebarProps {
-  tags: Tag[]
+  tags: (Tag & { recipeCount?: number[] })[]
   selectedTags: string[]
-  // onTagChange: (tagId: string) => void
+  onTagChange: (tagId: string) => void
   sortBy: "newest" | "oldest"
   onSortChange: (sort: "newest" | "oldest") => void
 }
@@ -17,7 +17,7 @@ interface FilterSidebarProps {
 export function FilterSidebar({
   tags,
   selectedTags,
-  // onTagChange,
+  onTagChange,
   sortBy,
   onSortChange,
 }: FilterSidebarProps) {
@@ -94,21 +94,21 @@ export function FilterSidebar({
                   key={tag.id}
                 >
                   <input
-                    checked={selectedTags.includes(tag.id)}
+                    checked={selectedTags.includes(String(tag.id))}
                     className="size-4 rounded text-secondary accent-secondary"
-                    // onChange={() => onTagChange(tag.id)}
+                    onChange={() => onTagChange(String(tag.id))}
                     type="checkbox"
                   />
                   <span
                     className="inline-block size-3 rounded-full"
-                    style={{ backgroundColor: tag.color || "#f59e0b" }}
+                    style={{ backgroundColor: "#ed4b9b" }}
                   />
                   <span className="flex-1 text-muted-foreground text-sm transition-colors group-hover:text-foreground">
                     {tag.name}
                   </span>
                   <span className="text-muted-foreground/50 text-xs">
                     {/* Recipe count would go here if we had it */}
-                    (0)
+                    {`(${tag.recipeCount?.length || 0})`}
                   </span>
                 </label>
               ))

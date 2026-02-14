@@ -1,28 +1,25 @@
-"use client"
-
-import type { Recipe, Tag } from "payload-types"
-import * as React from "react"
-
 import { FilterSidebar } from "@/components/modules/recipies/ui/filter-sidebar"
 import { RecipeGrid } from "@/components/modules/recipies/ui/recipe-grid"
 import { SearchBar } from "@/components/modules/recipies/ui/search-bar"
-import { recentRecipes } from "@/constants"
+import { api } from "@/server/api"
 
-export default function RecipesPage() {
-  return (
-    <React.Suspense fallback={<div>Loading...</div>}>
-      <RecipesSuspense />
-    </React.Suspense>
-  )
-}
+export default async function RecipesPage() {
+  const { docs: recipes, totalDocs: recipeCount } = await api.find({
+    collection: "recipes",
+    // TODO: add pagination, search, filter, and sort params
+  })
+  const { docs: tags } = await api.find({
+    collection: "tags",
+  })
 
-export function RecipesSuspense() {
-  const [recipes, setRecipes] = React.useState<Recipe[]>(recentRecipes)
-  const [tags, setTags] = React.useState<Tag[]>([])
-  const [loading, setLoading] = React.useState<boolean>(false)
-  const [searchQuery, setSearchQuery] = React.useState<string>("")
-  const [selectedTags, setSelectedTags] = React.useState<string[]>([])
-  const [sortBy, setSortBy] = React.useState<"newest" | "oldest">("newest")
+  const tagsWithRecipeCounts = tags.map((tag) => {
+    return { ...tag, recipeCount: new Array(recipeCount).fill(0) as number[] }
+  })
+
+  const loading = false
+  const searchQuery = ""
+  const selectedTags: string[] = []
+  const sortBy: "newest" | "oldest" = "newest"
 
   return (
     <main className="min-h-screen">
@@ -39,17 +36,19 @@ export function RecipesSuspense() {
         </div>
 
         <div className="mb-8">
-          <SearchBar onSearch={setSearchQuery} />
+          <SearchBar
+          // onSearch={setSearchQuery}
+          />
         </div>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
           <aside className="lg:sticky lg:top-24 lg:h-fit">
             <FilterSidebar
-              onSortChange={setSortBy}
-              selectedTags={selectedTags}
+              // onSortChange={setSortBy}
               // onTagChange={handleTagToggle}
+              selectedTags={selectedTags}
               sortBy={sortBy}
-              tags={tags}
+              tags={tagsWithRecipeCounts}
             />
           </aside>
 
