@@ -15,7 +15,7 @@ export function InstructionsSection({
 }: InstructionsSectionProps) {
   const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>({})
 
-  const toggleStep = (step: number) => {
+  function toggleStep(step: number) {
     setCheckedSteps((prev) => ({
       ...prev,
       [step]: !prev[step],
