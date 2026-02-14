@@ -1,13 +1,13 @@
 "use client"
 
+import type { Recipe } from "payload-types"
 import { useState } from "react"
 
 import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
-import type { Instruction } from "@/types"
 
 interface InstructionsSectionProps {
-  instructions: Instruction[]
+  instructions: Recipe["instructions"]
 }
 
 export function InstructionsSection({
@@ -22,7 +22,9 @@ export function InstructionsSection({
     }))
   }
 
-  const sortedInstructions = [...instructions].sort((a, b) => a.step - b.step)
+  const sortedInstructions = [...(instructions || [])].sort(
+    (a, b) => a.step - b.step,
+  )
 
   return (
     <div className="space-y-4">

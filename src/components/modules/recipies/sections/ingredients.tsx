@@ -1,13 +1,13 @@
 "use client"
 
+import type { Recipe } from "payload-types"
 import * as React from "react"
 
 import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
-import type { Ingredient } from "@/types"
 
 interface IngredientsSectionProps {
-  ingredients: Ingredient[]
+  ingredients: Recipe["ingredients"]
 }
 
 export function IngredientsSection({ ingredients }: IngredientsSectionProps) {
@@ -27,7 +27,7 @@ export function IngredientsSection({ ingredients }: IngredientsSectionProps) {
     <div className="space-y-4">
       <h2 className="font-bold text-2xl text-foreground">Ingredients</h2>
       <div className="space-y-2">
-        {ingredients.map((ingredient, index) => {
+        {ingredients?.map((ingredient, index) => {
           const id = ingredient.id || `ingredient-${index}`
           const isChecked = checkedItems[id] || false
 

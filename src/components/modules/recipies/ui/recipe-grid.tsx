@@ -4,7 +4,7 @@ import { IconChefHat } from "@tabler/icons-react"
 import { usePathname } from "next/navigation"
 import type { Recipe } from "payload-types"
 
-import { RecipeCard } from "@/components/recipe-card"
+import { RecipeCard } from "@/components/modules/recipies/ui/recipe-card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 
