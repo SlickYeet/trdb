@@ -95,7 +95,7 @@ export const Recipes: CollectionConfig = {
           type: "number",
         },
         {
-          name: "instruction",
+          name: "description",
           required: true,
           type: "textarea",
         },
