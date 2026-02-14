@@ -90,11 +90,6 @@ export const Recipes: CollectionConfig = {
       },
       fields: [
         {
-          name: "step",
-          required: true,
-          type: "number",
-        },
-        {
           name: "description",
           required: true,
           type: "textarea",
