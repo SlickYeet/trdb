@@ -1,13 +1,13 @@
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { postgresAdapter } from "@payloadcms/db-postgres"
-import { lexicalEditor } from "@payloadcms/richtext-lexical"
 import { buildConfig } from "payload"
 import sharp from "sharp"
 
 import { Media } from "@/collections/Media"
 import { Users } from "@/collections/Users"
 import { env } from "@/env"
+import { defaultLexical } from "@/fields/default-lexical"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,7 +33,7 @@ export default buildConfig({
       connectionString: env.DATABASE_URL,
     },
   }),
-  editor: lexicalEditor(),
+  editor: defaultLexical,
   plugins: [
     // storage-adapter-placeholder
   ],
