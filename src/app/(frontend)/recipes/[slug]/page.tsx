@@ -2,8 +2,8 @@ import { IconArrowLeft, IconChefHat, IconClock } from "@tabler/icons-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { IngredientsSection } from "@/components/ingredients-section"
-import { InstructionsSection } from "@/components/instructions-section"
+import { IngredientsSection } from "@/components/modules/recipies/sections/ingredients"
+import { InstructionsSection } from "@/components/modules/recipies/sections/instructions"
 import { TagBadge } from "@/components/tag-badge"
 import { recentRecipes } from "@/constants"
 

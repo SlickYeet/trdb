@@ -2,7 +2,7 @@ import { IconArrowRight } from "@tabler/icons-react"
 import Link from "next/link"
 import type { Recipe } from "payload-types"
 
-import { RecipeGrid } from "@/components/recipe-grid"
+import { RecipeGrid } from "@/components/modules/recipies/ui/recipe-grid"
 import { cn } from "@/lib/utils"
 
 interface RecentRecipesSectionProps {

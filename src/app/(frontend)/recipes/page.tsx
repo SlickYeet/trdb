@@ -3,9 +3,9 @@
 import type { Recipe, Tag } from "payload-types"
 import * as React from "react"
 
-import { FilterSidebar } from "@/components/filter-sidebar"
-import { RecipeGrid } from "@/components/recipe-grid"
-import { SearchBar } from "@/components/search-bar"
+import { FilterSidebar } from "@/components/modules/recipies/ui/filter-sidebar"
+import { RecipeGrid } from "@/components/modules/recipies/ui/recipe-grid"
+import { SearchBar } from "@/components/modules/recipies/ui/search-bar"
 import { recentRecipes } from "@/constants"
 
 export default function RecipesPage() {
