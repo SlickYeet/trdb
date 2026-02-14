@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Geist_Mono, Noto_Sans } from "next/font/google"
 
 import { SiteHeader } from "@/components/site-header"
+import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
 import "@/styles/globals.css"
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html className="dark" lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "font-mono antialiased",
@@ -30,8 +31,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           geistMono.variable,
         )}
       >
-        <SiteHeader />
-        {children}
+        <ThemeProvider>
+          <SiteHeader />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
