@@ -12,7 +12,7 @@ export function TagBadge({ tag, interactive }: TagBadgeProps) {
   if (!interactive) {
     return (
       <span
-        className="inline-flex items-center rounded-full px-3 py-1 font-medium text-sm text-white transition-colors hover:opacity-90"
+        className="inline-flex items-center rounded-full px-3 py-1 font-medium text-sm text-white"
         style={{ backgroundColor: color }}
       >
         {tag.name}
