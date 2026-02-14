@@ -8,6 +8,8 @@ import {
 } from "@payloadcms/richtext-lexical"
 import type { CollectionConfig } from "payload"
 
+import { slugField } from "@/fields/slug"
+
 export const Recipes: CollectionConfig = {
   admin: {
     defaultColumns: ["title", "prepTime", "cookTime", "tags", "createdAt"],
@@ -19,27 +21,7 @@ export const Recipes: CollectionConfig = {
       required: true,
       type: "text",
     },
-    {
-      admin: {
-        position: "sidebar",
-        readOnly: true,
-      },
-      hooks: {
-        beforeChange: [
-          ({ data }) => {
-            if (data?.title) {
-              data.slug = data.title
-                .toLowerCase()
-                .replace(/\s+/g, "-")
-                .replace(/[^\w-]+/g, "")
-            }
-            return data
-          },
-        ],
-      },
-      name: "slug",
-      type: "text",
-    },
+    ...slugField(),
     {
       admin: {
         description: "Short summary of the recipe",

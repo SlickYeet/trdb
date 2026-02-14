@@ -170,6 +170,7 @@ export interface Recipe {
   id: number;
   title: string;
   slug?: string | null;
+  slugLock?: boolean | null;
   /**
    * Short summary of the recipe
    */
@@ -373,6 +374,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface RecipesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  slugLock?: T;
   description?: T;
   prepTime?: T;
   cookTime?: T;

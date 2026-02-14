@@ -1,5 +1,7 @@
 import type { CollectionConfig } from "payload"
 
+import { slugField } from "@/fields/slug"
+
 export const Tags: CollectionConfig = {
   admin: {
     useAsTitle: "name",
@@ -11,27 +13,7 @@ export const Tags: CollectionConfig = {
       type: "text",
       unique: true,
     },
-    {
-      admin: {
-        position: "sidebar",
-        readOnly: true,
-      },
-      hooks: {
-        beforeChange: [
-          ({ data }) => {
-            if (data?.name) {
-              data.slug = data.name
-                .toLowerCase()
-                .replace(/\s+/g, "-")
-                .replace(/[^\w-]+/g, "")
-            }
-            return data
-          },
-        ],
-      },
-      name: "slug",
-      type: "text",
-    },
+    ...slugField(),
     {
       admin: {
         description: "Hex color for tag display",
