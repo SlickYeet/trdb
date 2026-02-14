@@ -1,12 +1,12 @@
 "use client"
 
+import type { Recipe, Tag } from "payload-types"
 import * as React from "react"
 
 import { FilterSidebar } from "@/components/filter-sidebar"
 import { RecipeGrid } from "@/components/recipe-grid"
 import { SearchBar } from "@/components/search-bar"
 import { recentRecipes } from "@/constants"
-import type { Recipe, Tag } from "@/types"
 
 export default function RecipesPage() {
   return (
@@ -54,7 +54,11 @@ export function RecipesSuspense() {
           </aside>
 
           <div className="lg:col-span-3">
-            <RecipeGrid loading={loading} recipes={recipes} />
+            <RecipeGrid
+              className="grid-cols-1 lg:grid-cols-2"
+              loading={loading}
+              recipes={recipes}
+            />
           </div>
         </div>
       </div>

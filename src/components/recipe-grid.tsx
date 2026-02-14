@@ -6,20 +6,27 @@ import type { Recipe } from "payload-types"
 
 import { RecipeCard } from "@/components/recipe-card"
 import { Skeleton } from "@/components/ui/skeleton"
+import { cn } from "@/lib/utils"
 
 interface RecipeGridProps {
   recipes: Recipe[]
   loading?: boolean
+  className?: string
 }
 
-export function RecipeGrid({ recipes, loading }: RecipeGridProps) {
+export function RecipeGrid({ recipes, loading, className }: RecipeGridProps) {
   const pathname = usePathname()
 
   const isRecipesPage = pathname === "/recipes"
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3",
+          className,
+        )}
+      >
         {Array.from({ length: 6 }).map((_, i) => (
           <Skeleton className="h-48 rounded-2xl" key={i} />
         ))}
@@ -42,7 +49,12 @@ export function RecipeGrid({ recipes, loading }: RecipeGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      className={cn(
+        "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3",
+        className,
+      )}
+    >
       {recipes.map((recipe) => (
         <RecipeCard key={recipe.id} recipe={recipe} />
       ))}
