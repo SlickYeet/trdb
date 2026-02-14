@@ -202,6 +202,7 @@ export interface Recipe {
   instructions?:
     | {
         description: string;
+        step: number;
         id?: string | null;
       }[]
     | null;
@@ -386,6 +387,7 @@ export interface RecipesSelect<T extends boolean = true> {
     | T
     | {
         description?: T;
+        step?: T;
         id?: T;
       };
   tags?: T;

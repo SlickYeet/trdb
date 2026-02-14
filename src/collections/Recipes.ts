@@ -76,6 +76,11 @@ export const Recipes: CollectionConfig = {
           required: true,
           type: "textarea",
         },
+        {
+          name: "step",
+          required: true,
+          type: "number",
+        },
       ],
       name: "instructions",
       type: "array",
