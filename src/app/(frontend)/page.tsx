@@ -7,7 +7,7 @@ import { api } from "@/server/api"
 export default async function HomePage() {
   const { docs, totalDocs } = await api.find({
     collection: "recipes",
-    limit: 4,
+    limit: 6,
     sort: "-createdAt",
   })
 
