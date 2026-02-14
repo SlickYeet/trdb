@@ -7,8 +7,6 @@ import { InstructionsSection } from "@/components/instructions-section"
 import { TagBadge } from "@/components/tag-badge"
 import { recentRecipes } from "@/constants"
 
-export const dynamic = "force-dynamic"
-
 export async function generateMetadata(props: PageProps<"/recipes/[slug]">) {
   const { slug } = await props.params
 

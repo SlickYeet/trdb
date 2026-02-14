@@ -8,8 +8,6 @@ import { SearchBar } from "@/components/search-bar"
 import { recentRecipes } from "@/constants"
 import type { Recipe, Tag } from "@/types"
 
-export const dynamic = "force-dynamic"
-
 export default function RecipesPage() {
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
