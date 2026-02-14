@@ -239,10 +239,6 @@ export interface Tag {
   name: string;
   slug?: string | null;
   slugLock?: boolean | null;
-  /**
-   * Hex color for tag display
-   */
-  color?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -405,7 +401,6 @@ export interface TagsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   slugLock?: T;
-  color?: T;
   updatedAt?: T;
   createdAt?: T;
 }

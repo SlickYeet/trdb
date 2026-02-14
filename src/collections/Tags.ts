@@ -13,15 +13,7 @@ export const Tags: CollectionConfig = {
       type: "text",
       unique: true,
     },
-    ...slugField(),
-    {
-      admin: {
-        description: "Hex color for tag display",
-      },
-      defaultValue: "#ed4b9b",
-      name: "color",
-      type: "text",
-    },
+    ...slugField("name"),
   ],
   slug: "tags",
 }
