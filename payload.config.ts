@@ -5,6 +5,8 @@ import { buildConfig } from "payload"
 import sharp from "sharp"
 
 import { Media } from "@/collections/Media"
+import { Recipes } from "@/collections/Recipes"
+import { Tags } from "@/collections/Tags"
 import { Users } from "@/collections/Users"
 import { env } from "@/env"
 import { defaultLexical } from "@/fields/default-lexical"
@@ -27,7 +29,7 @@ export default buildConfig({
     },
     user: Users.slug,
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Recipes, Tags],
   db: postgresAdapter({
     pool: {
       connectionString: env.DATABASE_URL,

@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    recipes: Recipe;
+    tags: Tag;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +80,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    recipes: RecipesSelect<false> | RecipesSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -160,6 +164,89 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipes".
+ */
+export interface Recipe {
+  id: number;
+  title: string;
+  slug?: string | null;
+  /**
+   * Short summary of the recipe
+   */
+  description?: string | null;
+  /**
+   * Preparation time in minutes
+   */
+  prepTime?: number | null;
+  /**
+   * Cooking time in minutes
+   */
+  cookTime?: number | null;
+  /**
+   * List of ingredients and quantities
+   */
+  ingredients?:
+    | {
+        name: string;
+        /**
+         * e.g. '2 cups', '1 tbsp'
+         */
+        quantity?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Cooking steps in order
+   */
+  instructions?:
+    | {
+        step: number;
+        instruction: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Categorize this recipe
+   */
+  tags?: (number | Tag)[] | null;
+  /**
+   * Personal notes, modifications, or observations
+   */
+  notes?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  name: string;
+  slug?: string | null;
+  /**
+   * Hex color for tag display
+   */
+  color?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -189,6 +276,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'recipes';
+        value: number | Recipe;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -271,6 +366,46 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipes_select".
+ */
+export interface RecipesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  prepTime?: T;
+  cookTime?: T;
+  ingredients?:
+    | T
+    | {
+        name?: T;
+        quantity?: T;
+        id?: T;
+      };
+  instructions?:
+    | T
+    | {
+        step?: T;
+        instruction?: T;
+        id?: T;
+      };
+  tags?: T;
+  notes?: T;
+  createdAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  color?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
