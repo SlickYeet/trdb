@@ -3,6 +3,7 @@
 import { IconLoader2 } from "@tabler/icons-react"
 import Form from "next/form"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import type { Recipe, Tag } from "payload-types"
 import * as React from "react"
 
@@ -20,6 +21,8 @@ interface AddRecipeFormProps {
 }
 
 export function AddRecipeForm({ availableTags }: AddRecipeFormProps) {
+  const router = useRouter()
+
   const [ingredients, setIngredients] = React.useState<Recipe["ingredients"]>(
     [],
   )
@@ -55,12 +58,14 @@ export function AddRecipeForm({ availableTags }: AddRecipeFormProps) {
 
       formData.append("tags", selectedTags.join(","))
 
-      await createRecipe(formData)
+      const slug = await createRecipe(formData)
+
+      router.push(`/recipes/${slug}`)
     } catch (error) {
       setError(
         error instanceof Error
           ? error.message
-          : "Failed to create recipe. Please try again.",
+          : `Failed to create recipe. Please try again. ${error}`,
       )
     } finally {
       setIsSubmitting(false)

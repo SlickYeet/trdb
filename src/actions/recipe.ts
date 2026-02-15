@@ -1,6 +1,5 @@
 "use server"
 
-import { redirect } from "next/navigation"
 import type { Recipe } from "payload-types"
 
 import { api } from "@/server/api"
@@ -51,9 +50,8 @@ export async function createRecipe(formData: FormData) {
       }
     : undefined
 
-  let recipe: Recipe
   try {
-    recipe = await api.create({
+    const recipe = await api.create({
       collection: "recipes",
       data: {
         cookTime: cookTime ? parseInt(cookTime, 10) : undefined,
@@ -66,10 +64,10 @@ export async function createRecipe(formData: FormData) {
         title,
       },
     })
+
+    return recipe.slug
   } catch (error) {
     console.error("Error creating recipe:", error)
     throw new Error("Failed to create recipe.")
   }
-
-  redirect(`/recipes/${recipe.slug}`)
 }
