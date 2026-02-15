@@ -3,7 +3,6 @@
 import { redirect } from "next/navigation"
 import type { Recipe } from "payload-types"
 
-import { formatSlug } from "@/lib/format-slug"
 import { api } from "@/server/api"
 
 export async function createRecipe(formData: FormData) {
@@ -72,6 +71,5 @@ export async function createRecipe(formData: FormData) {
     throw new Error("Failed to create recipe.")
   }
 
-  const slug = recipe.slug || formatSlug(title)
-  redirect(`/recipes/${slug}`)
+  redirect(`/recipes/${recipe.slug}`)
 }
