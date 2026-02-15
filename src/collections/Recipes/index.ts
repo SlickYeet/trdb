@@ -10,6 +10,8 @@ import type { CollectionConfig } from "payload"
 
 import { slugField } from "@/fields/slug"
 
+import { revalidateDelete, revalidateRecipes } from "./hooks/revalidate-recipes"
+
 export const Recipes: CollectionConfig = {
   admin: {
     defaultColumns: ["title", "prepTime", "cookTime", "tags", "createdAt"],
@@ -131,5 +133,9 @@ export const Recipes: CollectionConfig = {
       type: "date",
     },
   ],
+  hooks: {
+    afterChange: [revalidateRecipes],
+    afterDelete: [revalidateDelete],
+  },
   slug: "recipes",
 }
