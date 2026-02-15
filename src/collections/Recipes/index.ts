@@ -74,14 +74,14 @@ export const Recipes: CollectionConfig = {
       },
       fields: [
         {
-          name: "description",
-          required: true,
-          type: "textarea",
-        },
-        {
           name: "step",
           required: true,
           type: "number",
+        },
+        {
+          name: "description",
+          required: true,
+          type: "textarea",
         },
       ],
       name: "instructions",
