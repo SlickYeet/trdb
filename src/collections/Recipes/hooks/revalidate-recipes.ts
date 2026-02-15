@@ -21,7 +21,7 @@ export const revalidateRecipes: CollectionAfterChangeHook<Recipe> = ({
     revalidateTag("recipes", "max")
   }
 
-  if (previousDoc && previousDoc.slug !== doc.slug) {
+  if (previousDoc?.slug && previousDoc.slug !== doc.slug) {
     const oldPath = `/recipes/${previousDoc.slug}`
 
     payload.logger.info(`Revalidating old path: ${oldPath}`)
