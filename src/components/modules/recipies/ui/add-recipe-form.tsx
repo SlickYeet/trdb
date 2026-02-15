@@ -1,7 +1,6 @@
 "use client"
 
 import { IconLoader2 } from "@tabler/icons-react"
-import Form from "next/form"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import type { Recipe, Tag } from "payload-types"
@@ -33,11 +32,15 @@ export function AddRecipeForm({ availableTags }: AddRecipeFormProps) {
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string | null>(null)
 
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault()
+
     setIsSubmitting(true)
     setError(null)
 
     try {
+      const formData = new FormData(e.currentTarget)
+
       formData.append(
         "ingredients",
         JSON.stringify(
@@ -73,7 +76,7 @@ export function AddRecipeForm({ availableTags }: AddRecipeFormProps) {
   }
 
   return (
-    <Form action={handleSubmit} className="space-y-6">
+    <form className="space-y-6" onSubmit={handleSubmit}>
       <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <div className="space-y-4">
           <h2 className="border-border border-b pb-2 font-semibold text-foreground text-lg">
@@ -212,6 +215,6 @@ export function AddRecipeForm({ availableTags }: AddRecipeFormProps) {
           )}
         </button>
       </div>
-    </Form>
+    </form>
   )
 }
