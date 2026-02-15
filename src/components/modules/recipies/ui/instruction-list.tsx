@@ -69,7 +69,7 @@ export function InstructionList({ onChange }: InstructionListProps) {
             </div>
             {instructions.length > 1 && (
               <button
-                className="mt-2 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-destructive"
+                className="mt-2 cursor-pointer rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-destructive"
                 onClick={() => removeInstruction(instruction.id || "")}
                 type="button"
               >
@@ -80,7 +80,7 @@ export function InstructionList({ onChange }: InstructionListProps) {
         ))}
 
         <button
-          className="flex items-center gap-2 font-medium text-sm transition-colors hover:text-foreground/80"
+          className="flex cursor-pointer items-center gap-2 font-medium text-sm transition-colors hover:text-foreground/80"
           onClick={addInstruction}
           type="button"
         >

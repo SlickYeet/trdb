@@ -184,7 +184,7 @@ export function AddRecipeForm({ availableTags }: AddRecipeFormProps) {
       <div className="flex justify-end gap-3">
         <Link href="/recipes">
           <button
-            className="rounded-xl border border-border bg-card px-6 py-3 font-medium text-foreground transition-colors hover:bg-muted"
+            className="cursor-pointer rounded-xl border border-border bg-card px-6 py-3 font-medium text-foreground transition-colors hover:bg-muted"
             disabled={isSubmitting}
             type="button"
           >
@@ -193,7 +193,7 @@ export function AddRecipeForm({ availableTags }: AddRecipeFormProps) {
         </Link>
 
         <button
-          className="flex items-center gap-2 rounded-xl bg-secondary px-6 py-3 font-medium shadow-md transition-all hover:bg-secondary/90 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex cursor-pointer items-center gap-2 rounded-xl bg-secondary px-6 py-3 font-medium shadow-md transition-all hover:bg-secondary/90 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
           disabled={isSubmitting}
           type="submit"
         >

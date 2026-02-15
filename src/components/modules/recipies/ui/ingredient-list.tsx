@@ -79,7 +79,7 @@ export function IngredientList({ onChange }: IngredientListProps) {
 
             {ingredients.length > 1 && (
               <button
-                className="mt-2 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-destructive"
+                className="mt-2 cursor-pointer rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-destructive"
                 onClick={() => removeIngredient(ingredient.id || "")}
                 type="button"
               >
@@ -90,7 +90,7 @@ export function IngredientList({ onChange }: IngredientListProps) {
         ))}
 
         <button
-          className="flex items-center gap-2 font-medium text-sm transition-colors hover:text-foreground/80"
+          className="flex cursor-pointer items-center gap-2 font-medium text-sm transition-colors hover:text-foreground/80"
           onClick={addIngredient}
           type="button"
         >

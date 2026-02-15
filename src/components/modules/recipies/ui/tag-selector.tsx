@@ -64,7 +64,7 @@ export function TagSelector({ onChange, availableTags }: TagSelectorProps) {
             <button
               className={cn(
                 "rounded-full bg-primary/20 px-4 py-2 font-medium text-sm transition-all",
-                "flex items-center gap-1.5 border-2",
+                "flex cursor-pointer items-center gap-1.5 border-2",
                 isSelected
                   ? "scale-105 border-primary/50 text-foreground/90 shadow-md"
                   : "border-transparent text-primary hover:scale-105",
