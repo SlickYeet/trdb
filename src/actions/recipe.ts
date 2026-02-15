@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation"
 import type { Recipe } from "payload-types"
 
+import { formatSlug } from "@/lib/format-slug"
 import { api } from "@/server/api"
 
 export async function createRecipe(formData: FormData) {
@@ -51,8 +52,9 @@ export async function createRecipe(formData: FormData) {
       }
     : undefined
 
+  let recipe: Recipe
   try {
-    const recipe = await api.create({
+    recipe = await api.create({
       collection: "recipes",
       data: {
         cookTime: cookTime ? parseInt(cookTime, 10) : undefined,
@@ -65,10 +67,11 @@ export async function createRecipe(formData: FormData) {
         title,
       },
     })
-
-    redirect(`/recipes/${recipe.slug}`)
   } catch (error) {
     console.error("Error creating recipe:", error)
     throw new Error("Failed to create recipe.")
   }
+
+  const slug = recipe.slug || formatSlug(title)
+  redirect(`/recipes/${slug}`)
 }
