@@ -1,4 +1,4 @@
-import { revalidatePath, updateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import type {
   CollectionAfterChangeHook,
   CollectionAfterDeleteHook,
@@ -18,7 +18,7 @@ export const revalidateRecipes: CollectionAfterChangeHook<Recipe> = ({
     revalidatePath(path)
     revalidatePath("/recipes")
     revalidatePath("/")
-    updateTag("recipes")
+    revalidateTag("recipes", "max")
   }
 
   if (previousDoc && previousDoc.slug !== doc.slug) {
@@ -29,7 +29,7 @@ export const revalidateRecipes: CollectionAfterChangeHook<Recipe> = ({
     revalidatePath(oldPath)
     revalidatePath("/recipes")
     revalidatePath("/")
-    updateTag("recipes")
+    revalidateTag("recipes", "max")
   }
 
   return doc
@@ -45,7 +45,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Recipe> = ({
     revalidatePath(path)
     revalidatePath("/recipes")
     revalidatePath("/")
-    updateTag("recipes")
+    revalidateTag("recipes", "max")
   }
 
   return doc
